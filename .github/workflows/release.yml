@@ -43,6 +43,7 @@ jobs:
         mkdir dist
         mv Discord*.AppImage dist/.
         cd dist
+        mv Discord*.AppImage Discord-$(cat ../Discord/resources/build_info.json | jq -r .version)-x86_64.AppImage
         chmod +x *.AppImage
         cd ..
        
