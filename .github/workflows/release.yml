@@ -1,0 +1,77 @@
+
+name: Release
+on:
+  schedule:
+    - cron: "5 */12 * * *"
+  push:
+    branches:
+      - "master"
+
+
+jobs:
+  Discord:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        version: ['3.8']
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download Discord
+      run: |
+        mkdir discord
+        cd discord
+        wget https://discord.com/api/download\?platform\=linux\&format\=tar.gz 
+        mv * discord.tar.gz
+        tar -xf discord.tar.gz
+        cd ..
+
+    - name: Patch to include files
+      run: |
+        cd discord
+        cp ../AppRun Discord/.
+        chmod +x Discord/AppRun
+        cp ../discord.desktop Discord/.
+        cd ..
+    
+    - name: Patch AppImage
+      run: |
+        cd discord
+        wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+        chmod +x *.AppImage
+        ./appimagetool-x86_64.AppImage --comp gzip Discord -n -u 'gh-releases-zsync|srevinsaju|discord-appimage|latest|Discord*.AppImage.zsync'
+        mkdir dist
+        mv Discord*.AppImage dist/.
+        cd dist
+        chmod +x *.AppImage
+        cd ..
+       
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: discord-continuous-x86_64.AppImage
+        path: 'Discord/dist'
+
+
+  Release:
+    needs: [Discord]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/download-artifact@v1
+      with:
+        name: discord-continuous-x86_64.AppImage
+
+    - name: Release
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        title: Discord Stable AppImage Builds
+        automatic_release_tag: stable
+        prerelease: false
+        draft: false
+        files: |
+          discord-continuous-x86_64.AppImage
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+
+
