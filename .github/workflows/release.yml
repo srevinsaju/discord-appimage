@@ -51,7 +51,7 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: discord-continuous-x86_64.AppImage
-        path: 'Discord/dist'
+        path: 'discord/dist'
 
 
   Release:
