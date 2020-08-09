@@ -130,7 +130,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v1
       with:
-        name: discord-continuous-x86_64.AppImage
+        name: discord-ptb-continuous-x86_64.AppImage
 
     - name: Release
       uses: marvinpinto/action-automatic-releases@latest
