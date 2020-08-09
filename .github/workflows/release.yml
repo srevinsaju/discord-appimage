@@ -87,7 +87,7 @@ jobs:
       run: |
         mkdir discord
         cd discord
-        wget https://discord.com/api/download/ptb?platform=linux&format=tar.gz
+        wget https://discord.com/api/download/ptb\?platform\=linux\&format\=tar.gz
         mv * discord.tar.gz
         tar -xf discord.tar.gz
         cd ..
