@@ -98,7 +98,7 @@ jobs:
         cd discord
         cp ../AppRun DiscordPTB/.
         chmod +x DiscordPTB/AppRun
-        sed 's,BIN="$APPDIR/Discord",BIN="$APPDIR/DiscordPTB",g' -i AppRun
+        sed 's,BIN="$APPDIR/Discord",BIN="$APPDIR/DiscordPTB",g' -i DiscordPTB/AppRun
         cp ../discord.desktop DiscordPTB/.
         cd ..
     
