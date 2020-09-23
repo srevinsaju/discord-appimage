@@ -106,6 +106,7 @@ jobs:
         cd discord
         wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
         chmod +x *.AppImage
+        rm DiscordPTB/discord*ptb*.desktop
         ls DiscordPTB
         ./appimagetool-x86_64.AppImage DiscordPTB -n -u 'gh-releases-zsync|srevinsaju|discord-appimage|canary|Discord*.AppImage.zsync' Discord-$(cat DiscordPTB/resources/build_info.json | jq -r .version)-x86_64.AppImage
         mkdir dist
