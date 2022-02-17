@@ -14,7 +14,7 @@
   </p>
 </p>
 
-(Unofficial) Continuous Integration to create Discord AppImages directly from source. 
+(Unofficial) Continuous Integration to create Discord AppImages directly from officia discord binary. 
 
 Download from:
 
