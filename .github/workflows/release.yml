@@ -75,7 +75,7 @@ jobs:
           discord-continuous-x86_64.AppImage
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
-  Discord-Canary:
+  Discord-PTB:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
@@ -124,8 +124,8 @@ jobs:
         path: 'discord/dist'
 
 
-  Release-Canary:
-    needs: [Discord-Canary]
+  Release-PTB:
+    needs: [Discord-PTB]
     runs-on: ubuntu-latest
 
     steps:
@@ -137,11 +137,78 @@ jobs:
       uses: marvinpinto/action-automatic-releases@latest
       with:
         title: Discord Public Test AppImage Builds
-        automatic_release_tag: canary
+        automatic_release_tag: ptb
         prerelease: true
         draft: false
         files: |
           discord-ptb-continuous-x86_64.AppImage
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
+  Discord-Canary:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        version: ['3.8']
+    steps:
+    - uses: actions/checkout@v2
 
+    - name: Download Discord
+      run: |
+        mkdir discord
+        cd discord
+        wget https://discord.com/api/download/canary\?platform\=linux\&format\=tar.gz
+        mv * discord.tar.gz
+        tar -xf discord.tar.gz
+        cd ..
+
+    - name: Patch to include files
+      run: |
+        cd discord
+        cp ../AppRun DiscordCanary/.
+        chmod +x DiscordCanary/AppRun
+        sed 's,BIN="$APPDIR/Discord",BIN="$APPDIR/DiscordCanary",g' -i DiscordCanary/AppRun
+        cp ../discord.desktop DiscordCanary/.
+        cd ..
+    
+    - name: Patch AppImage
+      run: |
+        cd discord
+        wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+        chmod +x *.AppImage
+        rm DiscordCanary/discord*canary*.desktop
+        ls DiscordCanary
+        ./appimagetool-x86_64.AppImage DiscordCanary -n -u 'gh-releases-zsync|srevinsaju|discord-appimage|canary|Discord*.AppImage.zsync' Discord-$(cat DiscordCanary/resources/build_info.json | jq -r .version)-x86_64.AppImage
+        mkdir dist
+        mv Discord*.AppImage dist/.
+        mv *.zsync dist/.
+        cd dist
+        chmod +x *.AppImage
+        cd ..
+       
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: discord-canary-continuous-x86_64.AppImage
+        path: 'discord/dist'
+
+
+  Release-Canary:
+    needs: [Discord-Canary]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/download-artifact@v1
+      with:
+        name: discord-canary-continuous-x86_64.AppImage
+
+    - name: Release
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        title: Discord Canary AppImage Builds
+        automatic_release_tag: canary
+        prerelease: true
+        draft: false
+        files: |
+          discord-canary-continuous-x86_64.AppImage
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
