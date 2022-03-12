@@ -18,9 +18,9 @@
 
 Download from:
 
-| Stable | Beta | 
-| ------- | --------- |
-| [Releases](https://github.com/srevinsaju/discord-appimage/releases/tag/stable) | [Releases](https://github.com/srevinsaju/discord-appimage/releases/tag/canary)| 
+| Stable | PTB | Canary | 
+| ------- | --------- | --------- |
+| [Releases](https://github.com/srevinsaju/discord-appimage/releases/tag/stable) | [Releases](https://github.com/srevinsaju/discord-appimage/releases/tag/ptb) | [Releases](https://github.com/srevinsaju/discord-appimage/releases/tag/canary) | 
 
 
 or, use [`zap`](https://github.com/srevinsaju/zap), the command line AppImage package manager:
