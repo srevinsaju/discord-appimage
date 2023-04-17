@@ -11,7 +11,7 @@ on:
 
 jobs:
   Discord:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         version: ['3.8']
@@ -37,6 +37,7 @@ jobs:
     
     - name: Patch AppImage
       run: |
+        sudo apt install libfuse2 -y
         cd discord
         wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
         chmod +x *.AppImage
@@ -77,7 +78,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
   Discord-PTB:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         version: ['3.8']
@@ -104,6 +105,7 @@ jobs:
     
     - name: Patch AppImage
       run: |
+        sudo apt install libfuse2 -y
         cd discord
         wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
         chmod +x *.AppImage
@@ -146,7 +148,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
   Discord-Canary:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         version: ['3.8']
@@ -173,6 +175,7 @@ jobs:
     
     - name: Patch AppImage
       run: |
+        sudo apt install libfuse2 -y
         cd discord
         wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
         chmod +x *.AppImage
