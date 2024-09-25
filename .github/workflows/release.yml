@@ -51,7 +51,7 @@ jobs:
        
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: discord-continuous-x86_64.AppImage
         path: 'discord/dist'
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/download-artifact@v1
+    - uses: actions/download-artifact@v4
       with:
         name: discord-continuous-x86_64.AppImage
 
@@ -121,7 +121,7 @@ jobs:
        
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: discord-ptb-continuous-x86_64.AppImage
         path: 'discord/dist'
@@ -132,7 +132,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/download-artifact@v1
+    - uses: actions/download-artifact@v4
       with:
         name: discord-ptb-continuous-x86_64.AppImage
 
@@ -191,7 +191,7 @@ jobs:
        
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: discord-canary-continuous-x86_64.AppImage
         path: 'discord/dist'
@@ -202,7 +202,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/download-artifact@v1
+    - uses: actions/download-artifact@v4
       with:
         name: discord-canary-continuous-x86_64.AppImage
 
