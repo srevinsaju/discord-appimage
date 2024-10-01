@@ -136,6 +136,7 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: discord-ptb-continuous-x86_64.AppImage
+        path: ./artifacts-dir
 
     - name: Release
       uses: marvinpinto/action-automatic-releases@latest
@@ -145,7 +146,7 @@ jobs:
         prerelease: true
         draft: false
         files: |
-          discord-ptb-continuous-x86_64.AppImage
+          ./artifacts-dir/*
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
   Discord-Canary:
@@ -195,7 +196,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: discord-canary-continuous-x86_64.AppImage
-        path: 'discord/dist'
+        path: 'discord/dist/*'
 
 
   Release-Canary:
@@ -206,6 +207,7 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: discord-canary-continuous-x86_64.AppImage
+        path: ./artifacts-dir
 
     - name: Release
       uses: marvinpinto/action-automatic-releases@latest
@@ -215,5 +217,5 @@ jobs:
         prerelease: true
         draft: false
         files: |
-          discord-canary-continuous-x86_64.AppImage
+          ./artifacts-dir/*
         repo_token: ${{ secrets.GITHUB_TOKEN }}
