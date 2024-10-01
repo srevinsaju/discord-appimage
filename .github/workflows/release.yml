@@ -68,7 +68,7 @@ jobs:
         path: ./artifacts-dir
         
     - name: Debug Artifact Path
-      run: ls -R ./artifact-dir
+      run: ls -R ./artifacts-dir
       
     - name: Release
       uses: marvinpinto/action-automatic-releases@latest
