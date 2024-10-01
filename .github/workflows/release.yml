@@ -65,7 +65,11 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: discord-continuous-x86_64.AppImage
-
+        path: ./artifacts-dir
+        
+    - name: Debug Artifact Path
+      run: ls -R ./artifact-dir
+      
     - name: Release
       uses: marvinpinto/action-automatic-releases@latest
       with:
@@ -74,7 +78,7 @@ jobs:
         prerelease: false
         draft: false
         files: |
-          discord-continuous-x86_64.AppImage
+          ./artifacts-dir/discord-continuous-x86_64.AppImage
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
   Discord-PTB:
