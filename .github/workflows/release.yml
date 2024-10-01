@@ -54,7 +54,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: discord-continuous-x86_64.AppImage
-        path: 'discord/dist'
+        path: 'discord/dist/*'
 
 
   Release:
@@ -78,7 +78,7 @@ jobs:
         prerelease: false
         draft: false
         files: |
-          ./artifacts-dir/discord-continuous-x86_64.AppImage
+          ./artifacts-dir/*
         repo_token: ${{ secrets.GITHUB_TOKEN }}
 
   Discord-PTB:
@@ -128,7 +128,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: discord-ptb-continuous-x86_64.AppImage
-        path: 'discord/dist'
+        path: 'discord/dist/*'
 
 
   Release-PTB:
