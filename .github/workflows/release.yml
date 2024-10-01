@@ -66,10 +66,7 @@ jobs:
       with:
         name: discord-continuous-x86_64.AppImage
         path: ./artifacts-dir
-        
-    - name: Debug Artifact Path
-      run: ls -R ./artifacts-dir
-      
+
     - name: Release
       uses: marvinpinto/action-automatic-releases@latest
       with:
