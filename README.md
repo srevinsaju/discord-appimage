@@ -14,7 +14,7 @@
   </p>
 </p>
 
-(Unofficial) Continuous Integration to create Discord AppImages directly from officia discord binary. 
+(Unofficial) Continuous Integration to create Discord AppImages from Discord's official Linux updater.
 
 Download from:
 
@@ -28,10 +28,22 @@ or, use [`zap`](https://github.com/srevinsaju/zap), the command line AppImage pa
 zap install --github --from=srevinsaju/discord-appImage discord-appimage
 ```
 
+## Building
+
+Builds require Linux x86_64, `curl`, `file`, `jq`, `libfuse2`, and `tar`. The build
+downloads Discord's bootstrap package, materializes the selected release channel
+with Discord's updater, and validates the complete AppDir before and after AppImage
+packaging.
+
+```bash
+./build.sh stable
+```
+
+Use `ptb` or `canary` instead to build another channel. Each invocation requires
+an empty `build/` and `dist/` path and writes the AppImage and zsync metadata to
+`dist/`.
+
 
 ## License
 The continuous integration is licensed under the MIT License. "Discord" is a registered trademark of "Discord. Inc.". This AppImage continuous build system was created only for educational purposes, ease-of-use, and until Discord Inc provides an official AppImage build. For takedown requests, kindly [email](https://github.com/srevinsaju) me.
-
-
-
 
